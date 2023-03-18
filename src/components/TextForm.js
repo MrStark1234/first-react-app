@@ -6,28 +6,28 @@ export default function TextForm(props) {
 
     const handleUpClick = () => {
         setText(text.toUpperCase())
-        props.showAlert('Text converted to Upper Case', 'success')
+        props.showAlert('Converted to UpperCase', 'success')
     }
 
     const handleLoClick = () => {
         setText(text.toLowerCase())
-        props.showAlert('Text converted to Lower Case', 'success')
+        props.showAlert('Converted to LowerCase', 'success')
     }
     const clearText = () => {
         setText("")
         props.showAlert('Text Cleared', 'success')
     }
+    
     const copyText = () => {
-        var text = document.getElementById("myBox");
-        text.select();
-        navigator.clipboard.writeText(text.value);
-        document.getSelection().removeAllRanges()
-        props.showAlert('Text copied to clipboard', 'success')
-    }
+    navigator.clipboard.writeText(text);
+    props.showAlert('Text Copied', 'success');
+
+}
+ 
     const handleExtraSpaces = () => {
         let newText = text.split(/[ ]+/);
         setText(newText.join(" "))
-        props.showAlert('All extra spaces removed', 'success')
+        props.showAlert('Extra Spaces removed', 'success')
     }
     
 
@@ -52,7 +52,7 @@ export default function TextForm(props) {
 </div>
 <div className="container my-3" style={{color: props.mode==='dark'?'white':'black'}} >
     <h2>Your Text Summary</h2>
-    <p>{text.split(" ").filter( (e) => {return e.length !==0}).length} words, and {text.length} characters</p>
+    <p>{text.split(/\s+/).filter( (e) => {return e.length !==0}).length} words, and {text.length} characters</p>
     <p>{0.008* text.split(" ").filter( (e) => {return e.length !==0}).length} Minutes to read the total words. </p>
     <h2>Preview</h2>
     <p>{text.length > 0 ? text : 'Enter some text in the Textbox above to preview here......'}</p>
